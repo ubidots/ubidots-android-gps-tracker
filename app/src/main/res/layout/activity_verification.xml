@@ -1,0 +1,49 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/white"
+    tools:context="com.ubidots.ubidots.fragments.VerificationFragment">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:paddingBottom="26dip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:src="@drawable/ic_logo"
+            android:adjustViewBounds="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="45dp"
+            android:paddingLeft="45dp"
+            android:paddingTop="65dp"/>
+
+        <TextView
+            style="@style/UbidotsTheme.Text"
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/verification_text" />
+
+        <View
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/continue_map"
+            android:src="@drawable/ic_map"
+            android:adjustViewBounds="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="45dp"
+            android:paddingLeft="45dp"
+            android:paddingTop="25dp"/>
+    </LinearLayout>
+</ScrollView>

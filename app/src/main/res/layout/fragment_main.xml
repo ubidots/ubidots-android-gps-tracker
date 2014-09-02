@@ -1,0 +1,77 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fillViewport="true"
+    tools:context=".MainActivity"
+    tools:ignore="MergeRootFrame">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
+
+        <ImageView
+            android:adjustViewBounds="true"
+            android:contentDescription="Logo"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingLeft="16dip"
+            android:paddingRight="16dip"
+            android:paddingBottom="46dip"
+            android:paddingTop="46dip"
+            android:src="@drawable/ic_logo" />
+
+        <TextView
+            style="@style/UbidotsTheme.Text"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:paddingTop="0dip"
+            android:text="@string/main_descriptionText1" />
+
+        <ImageView
+            android:adjustViewBounds="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="26dip"
+            android:paddingBottom="26dip"
+            android:src="@drawable/ic_intro_img" />
+
+        <TextView
+            style="@style/UbidotsTheme.Text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/main_descriptionText2"/>
+        
+        <View
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/login_button"
+                style="@style/Ubidots.GreenButton"
+                android:layout_marginRight="5dip"
+                android:text="@string/main_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/sign_up_button"
+                style="@style/UbidotsTheme.RedButton"
+                android:text="@string/main_signup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

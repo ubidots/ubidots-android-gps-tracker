@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.ubidots.ubidots.UbidotsActivity" >
+
+    <item android:id="@+id/action_change_token"
+        android:title="@string/action_linkPhone"
+        android:orderInCategory="100"
+        android:showAsAction="collapseActionView" />
+
+    <item android:id="@+id/action_help"
+        android:title="@string/action_help"
+        android:orderInCategory="200"
+        android:showAsAction="collapseActionView" />
+</menu>

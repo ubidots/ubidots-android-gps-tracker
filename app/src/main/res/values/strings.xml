@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Strings for AndroidManifest.xml -->
+    <string name="app_name">Ubidots</string>
+    <string name="title_activity_introduction">IntroductionActivity</string>
+    <string name="title_activity_token">TokenActivity</string>
+    <string name="title_activity_ubidots">UbidotsActivity</string>
+    <string name="title_activity_verification">VerificationActivity</string>
+
+    <!-- Strings for /menu/ubidots.xml -->
+    <string name="action_linkPhone">Link my phone</string>
+    <string name="action_help">Help</string>
+
+    <!-- Strings for the ActionBar -->
+    <string name="actionBar_title">Location</string>
+
+    <!-- String for the MainActivity -->
+    <string name="main_descriptionText1">Ubidots is a cloud service to capture and make sense of
+        sensor data</string>
+    <string name="main_descriptionText2">Ubidots for Android® helps you push sensor data
+        from your phone to your Ubidots account</string>
+    <string name="main_login">Login</string>
+    <string name="main_signup">Sign up</string>
+
+    <!-- Strings for the verification fragment -->
+    <string name="verification_text">Tap the map below to start pushing GPS data to Ubidots</string>
+    <string name="verification_button">Continue</string>
+
+    <!-- Strings for the Ubidots activity -->
+    <string name="location">Your location</string>
+    <string name="enabled">✔︎</string>
+    <string name="disabled">✘</string>
+    <string name="enabled_text">Enabled︎</string>
+    <string name="disabled_text">Disabled</string>
+    <string name="ubidots_instruction">When enabled, this app will send your location data to
+        Ubidots at the time intervals you specify</string>
+
+    <plurals name="pushes_seconds">
+        <item quantity="one">Push every second</item>
+        <item quantity="other">Push every %d seconds</item>
+    </plurals>
+    <plurals name="pushes_minutes">
+        <item quantity="one">Push every minute</item>
+        <item quantity="other">Push every %d minutes</item>
+    </plurals>
+
+    <!-- Strings for the DialogFragment -->
+    <string name="dialogFragment_title">Choose the interval</string>
+
+    <string-array name="dialogFragment_pushTimes">
+        <item>1 sec</item>
+        <item>10 sec</item>
+        <item>30 sec</item>
+        <item>1 min</item>
+    </string-array>
+
+    <!-- Strings for the Notifications -->
+    <string name="notification_title">Ubidots running…</string>
+
+</resources>
