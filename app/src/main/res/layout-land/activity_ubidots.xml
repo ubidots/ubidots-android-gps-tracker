@@ -31,6 +31,12 @@
             android:gravity="center_horizontal"
             android:text="@string/main_descriptionText1" />
 
+        <View
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1" />
+
         <Button
             android:id="@+id/push_times_button"
             style="@style/UbidotsTheme.RedButton"
@@ -46,7 +52,7 @@
             android:layout_marginRight="@dimen/button_horizontal_margin"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="50dp">
 
             <TextView
                 android:id="@+id/toggleText"

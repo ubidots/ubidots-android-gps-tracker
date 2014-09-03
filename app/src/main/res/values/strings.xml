@@ -24,8 +24,11 @@
     <string name="main_signup">Sign up</string>
 
     <!-- Strings for the verification fragment -->
-    <string name="verification_text">Tap the map below to start pushing GPS data to Ubidots</string>
-    <string name="verification_button">Continue</string>
+    <string name="verification_text">Your phone has been linked to your account!</string>
+    <string name="verification_text2">Tap the map below to start pushing GPS data to
+        Ubidots</string>
+    <string name="verification_text2_land">Tap the map on the right to start pushing GPS data to
+        Ubidots</string>
 
     <!-- Strings for the Ubidots activity -->
     <string name="location">Your location</string>
