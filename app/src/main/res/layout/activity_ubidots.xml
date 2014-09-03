@@ -43,8 +43,8 @@
         android:layout_marginRight="@dimen/button_horizontal_margin"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        
+        android:layout_height="50dp">
+
         <TextView
             android:id="@+id/toggleText"
             android:textColor="@color/white"

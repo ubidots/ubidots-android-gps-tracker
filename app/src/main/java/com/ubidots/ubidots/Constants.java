@@ -22,7 +22,7 @@ public class Constants {
         // URLs
         public static final String LOGIN_URL = "http://app.ubidots.com";
         public static final String SIGN_UP_URL = "http://app.ubidots.com/accounts/signup/";
-        public static final String HELP_URL = "http://ubidots.com/mobile-client";
+        public static final String HELP_URL = "http://ubidots.com/docs/";
     }
 
     public static class VARIABLE_CONTEXT {

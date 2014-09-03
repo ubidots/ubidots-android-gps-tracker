@@ -24,5 +24,4 @@ dependencies {
     compile 'com.google.android.gms:play-services:5.0.89'
     compile 'com.android.support:support-v4:20.0.+'
     compile 'com.google.code.gson:gson:2.2.4'
-    compile 'com.ubidots:ubidots-java:1.6.4'
 }

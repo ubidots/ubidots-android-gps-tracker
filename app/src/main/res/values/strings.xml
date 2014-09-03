@@ -9,7 +9,7 @@
     <string name="title_activity_verification">VerificationActivity</string>
 
     <!-- Strings for /menu/ubidots.xml -->
-    <string name="action_linkPhone">Link my phone</string>
+    <string name="action_linkPhone">Relink my phone</string>
     <string name="action_help">Help</string>
 
     <!-- Strings for the ActionBar -->
