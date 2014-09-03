@@ -29,9 +29,9 @@
 
     <!-- Strings for the Ubidots activity -->
     <string name="location">Your location</string>
-    <string name="enabled">✔︎</string>
+    <string name="enabled">✔</string>
     <string name="disabled">✘</string>
-    <string name="enabled_text">Enabled︎</string>
+    <string name="enabled_text">Enabled</string>
     <string name="disabled_text">Disabled</string>
     <string name="ubidots_instruction">When enabled, this app will send your location data to
         Ubidots at the time intervals you specify</string>
