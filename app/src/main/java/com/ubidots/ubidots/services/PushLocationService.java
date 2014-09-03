@@ -7,7 +7,10 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,12 +19,6 @@ import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesClient;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.location.LocationClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
 import com.ubidots.ApiClient;
 import com.ubidots.Variable;
 import com.ubidots.ubidots.Constants;
@@ -31,18 +28,14 @@ import com.ubidots.ubidots.receivers.PushAlarmReceiver;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PushLocationService extends Service implements
-        GooglePlayServicesClient.ConnectionCallbacks,
-        GooglePlayServicesClient.OnConnectionFailedListener,
-        LocationListener {
+public class PushLocationService extends Service implements LocationListener {
 
     // For repeating this service
     private AlarmManager mAlarmManager;
     private PendingIntent mAlarmIntent;
 
     // For location updates
-    private LocationRequest mLocationRequest;
-    private LocationClient mLocationClient;
+    private LocationManager mLocationManager;
 
     // Read preference data
     private SharedPreferences mPrefs;
@@ -75,13 +68,15 @@ public class PushLocationService extends Service implements
             mAlarmManager.cancel(mAlarmIntent);
         }
 
-        // If Google Play is available and we have network connection
-        if ((isGooglePlayAvailable() && isRunning) &&
-                (connectionStatus == NetworkUtil.TYPE_MOBILE ||
-                        connectionStatus == NetworkUtil.TYPE_WIFI)) {
-            mLocationClient.connect();
-        } else if (mLocationClient != null && mLocationClient.isConnected()) {
-                mLocationClient.removeLocationUpdates(this);
+        // If we have network connection
+        if ((isRunning) && (connectionStatus == NetworkUtil.TYPE_MOBILE ||
+                connectionStatus == NetworkUtil.TYPE_WIFI)) {
+            String provider = (mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) ?
+                    LocationManager.NETWORK_PROVIDER : LocationManager.GPS_PROVIDER;
+
+            mLocationManager.requestLocationUpdates(provider, updateFreq * 1000, 0, this);
+        } else {
+            mLocationManager.removeUpdates(this);
         }
 
         return START_STICKY;
@@ -99,36 +94,19 @@ public class PushLocationService extends Service implements
         mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         mEditor = mPrefs.edit();
 
-        if (isGooglePlayAvailable())
-            initializeLocationUpdates();
+        initializeLocationUpdates();
     }
 
     @Override
     public void onDestroy() {
         stopSelf();
-        if (mLocationClient != null) {
-            mLocationClient.removeLocationUpdates(this);
-            mLocationClient.disconnect();
-        }
+        mLocationManager.removeUpdates(this);
 
         super.onDestroy();
     }
 
-    public boolean isGooglePlayAvailable() {
-        int availability = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
-
-        return availability == ConnectionResult.SUCCESS;
-    }
-
     public void initializeLocationUpdates() {
-        int updateFreq = mPrefs.getInt(Constants.PUSH_TIME, 1);
-
-        mLocationRequest = LocationRequest.create();
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-        mLocationRequest.setInterval(updateFreq * 1000);
-        mLocationRequest.setFastestInterval((updateFreq - 1) * 1000);
-
-        mLocationClient = new LocationClient(this, this, this);
+        mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
     }
 
     public void deleteNotification() {
@@ -145,16 +123,13 @@ public class PushLocationService extends Service implements
     }
 
     @Override
-    public void onConnected(Bundle bundle) {
-        mLocationClient.requestLocationUpdates(mLocationRequest, this);
-    }
+    public void onStatusChanged(String provider, int status, Bundle extras) { }
 
     @Override
-    public void onDisconnected() { }
+    public void onProviderEnabled(String provider) { }
 
     @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-    }
+    public void onProviderDisabled(String provider) { }
 
     public class UbidotsAPI extends AsyncTask<String, Void, Void> {
         private final String variableID = mPrefs.getString(Constants.VARIABLE_ID, null);
@@ -190,7 +165,7 @@ public class PushLocationService extends Service implements
                     public void run() {
                         if (getApplicationContext() != null) {
                             Toast.makeText(getApplicationContext(),
-                                    "Invalid Token",
+                                    "Error in connection",
                                     Toast.LENGTH_SHORT).show();
                         }
                         cancel(true);
