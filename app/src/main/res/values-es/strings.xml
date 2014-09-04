@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Strings for AndroidManifest.xml -->
+    <string name="app_name">Ubidots</string>
+    <string name="title_activity_introduction">IntroductionActivity</string>
+    <string name="title_activity_token">TokenActivity</string>
+    <string name="title_activity_ubidots">UbidotsActivity</string>
+    <string name="title_activity_verification">VerificationActivity</string>
+
+    <!-- Strings for /menu/ubidots.xml -->
+    <string name="action_linkPhone">Reenlazar mi teléfono</string>
+    <string name="action_help">Ayuda</string>
+
+    <!-- Strings for the ActionBar -->
+    <string name="actionBar_title">Ubicación</string>
+
+    <!-- String for the MainActivity -->
+    <string name="main_descriptionText1">Ubidots es un servicio en la nube para capturar y dar
+        sentido a los datos de los sensores</string>
+    <string name="main_descriptionText2">Ubidots para Android® te permite enviar datos de los
+        sensores de tu teléfono a tu cuenta de Ubidots</string>
+    <string name="main_login">Ingresar</string>
+    <string name="main_signup">Registrarse</string>
+
+    <!-- Strings for the verification fragment -->
+    <string name="verification_text">¡Tu teléfono se ha enlazado a tu cuenta!</string>
+    <string name="verification_text2">Toca el mapa de abajo para comenzar a enviar datos del GPS a
+        Ubidots</string>
+    <string name="verification_text2_land">Toca el mapa de la derecha para comenzar a enviar datos
+        del GPS a Ubidots</string>
+
+    <!-- Strings for the Ubidots activity -->
+    <string name="location">Tu ubicación</string>
+    <string name="enabled">✔</string>
+    <string name="disabled">✘</string>
+    <string name="enabled_text">Habilitado</string>
+    <string name="disabled_text">Deshabilitado</string>
+    <string name="ubidots_instruction">Cuando está habilitada, esta aplicación enviara tu ubicación
+        a Ubidots en los intervalos de tiempo que escojas</string>
+
+    <plurals name="pushes_seconds">
+        <item quantity="one">Envía cada segundo</item>
+        <item quantity="other">Envía cada %d segundos</item>
+    </plurals>
+    <plurals name="pushes_minutes">
+        <item quantity="one">Envía cada minuto</item>
+        <item quantity="other">Envía cada %d minutos</item>
+    </plurals>
+
+    <!-- Strings for the DialogFragment -->
+    <string name="dialogFragment_title">Escoge el intervalo</string>
+
+    <string-array name="dialogFragment_pushTimes">
+        <item>1 seg</item>
+        <item>10 seg</item>
+        <item>30 seg</item>
+        <item>1 min</item>
+    </string-array>
+
+    <!-- Strings for the Notifications -->
+    <string name="notification_title">Ubidots funcionando…</string>
+
+</resources>
