@@ -119,7 +119,8 @@ public class PushLocationService extends Service implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         String token = mPrefs.getString(Constants.TOKEN, null);
-        new UbidotsAPI(location.getLongitude(), location.getLatitude()).execute(token);
+        new UbidotsAPI(location.getLongitude(), location.getLatitude(),
+                location.getAltitude()).execute(token);
     }
 
     @Override
@@ -135,10 +136,12 @@ public class PushLocationService extends Service implements LocationListener {
         private final String variableID = mPrefs.getString(Constants.VARIABLE_ID, null);
         private double longitude;
         private double latitude;
+        private double altitude;
 
-        public UbidotsAPI(double longitude, double latitude) {
+        public UbidotsAPI(double longitude, double latitude, double altitude) {
             this.longitude = longitude;
             this.latitude = latitude;
+            this.altitude = altitude;
         }
 
         @Override
@@ -154,7 +157,7 @@ public class PushLocationService extends Service implements LocationListener {
 
                     if (!context.get(Constants.VARIABLE_CONTEXT.LATITUDE).equals(0.0) &&
                             !context.get(Constants.VARIABLE_CONTEXT.LONGITUDE).equals(0.0)) {
-                        variable.saveValue(1.0, context);
+                        variable.saveValue(altitude, context);
                     }
                 }
             } catch (Exception e) {
