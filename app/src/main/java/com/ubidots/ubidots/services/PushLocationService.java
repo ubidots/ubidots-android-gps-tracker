@@ -71,8 +71,8 @@ public class PushLocationService extends Service implements LocationListener {
         // If we have network connection
         if ((isRunning) && (connectionStatus == NetworkUtil.TYPE_MOBILE ||
                 connectionStatus == NetworkUtil.TYPE_WIFI)) {
-            String provider = (mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) ?
-                    LocationManager.NETWORK_PROVIDER : LocationManager.GPS_PROVIDER;
+            String provider = (mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) ?
+                    LocationManager.GPS_PROVIDER : LocationManager.NETWORK_PROVIDER;
 
             mLocationManager.requestLocationUpdates(provider, updateFreq * 1000, 0, this);
         } else {
