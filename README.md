@@ -1,10 +1,10 @@
-# Android Ubidots App
+# Ubidots GPS Tracker for Android
 
 ## Description
 
-Welcome to the Ubidots Application for Android devices. With this application you can push your actual location to Ubidots in an easy way; just log-in to your Ubidots account in the application and start pushing your data at any time interval you choose.
+Welcome to the Ubidots GPS Tracker for Android devices. With this application you can push your actual location to Ubidots in an easy way; just log-in to your Ubidots account in the application and start pushing your data at any time interval you choose.
 
-Our application ask for this permissions to install:
+Our application asks for these permissions to install:
 
 * **Your location:** We ask permission to access your location, so we can push that data into Ubidots and show it to you in a map.
 * **Modify or delete contents of your USB storage:** This doesn't mean we are going to access your storage to read all your files! This is needed because we save some values for the configuration of the application.
