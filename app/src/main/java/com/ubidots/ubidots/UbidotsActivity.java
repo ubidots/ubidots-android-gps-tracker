@@ -3,7 +3,6 @@ package com.ubidots.ubidots;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.DialogFragment;
-
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -20,9 +19,10 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
-
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,13 +31,16 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.ubidots.ubidots.fragments.ChangePushTimeFragment;
@@ -45,8 +48,7 @@ import com.ubidots.ubidots.services.PushLocationService;
 
 import java.lang.reflect.Field;
 
-public class UbidotsActivity extends Activity implements
-        ChangePushTimeFragment.DialogListener {
+public class UbidotsActivity extends AppCompatActivity implements ChangePushTimeFragment.DialogListener,OnMapReadyCallback {
     // Preferences
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
@@ -102,10 +104,8 @@ public class UbidotsActivity extends Activity implements
         mEditor = mSharedPreferences.edit();
 
         // Get preferences variables
-        boolean firstTime =
-                mSharedPreferences.getBoolean(Constants.FIRST_TIME, true);
-        mAlreadyRunning =
-                mSharedPreferences.getBoolean(Constants.SERVICE_RUNNING, false);
+        boolean firstTime = mSharedPreferences.getBoolean(Constants.FIRST_TIME, true);
+        mAlreadyRunning = mSharedPreferences.getBoolean(Constants.SERVICE_RUNNING, false);
         mTimeToPush = mSharedPreferences.getInt(Constants.PUSH_TIME, 1);
 
         // Set the text at the left of the Switch
@@ -124,8 +124,39 @@ public class UbidotsActivity extends Activity implements
         // Check if Google Maps is installed
         if (isGoogleMapsInstalled()) {
             // Instantiate the fragment containing the map in the layout
-            mGoogleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+            //mGoogleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+            //mGoogleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map));
+            MapFragment mapFragment = ((MapFragment) getFragmentManager().findFragmentById(R.id.map));
+            final UbidotsActivity activity = this;
+            mapFragment.getMapAsync(this);
 
+            mapFragment.getMapAsync(new OnMapReadyCallback()
+            {
+                @Override
+                public void onMapReady(GoogleMap googleMap)
+                {
+                    mGoogleMap = googleMap;
+                    if (mGoogleMap == null)
+                    {
+                        Toast.makeText(getApplicationContext(), "Unable to open Google map. Unable to continue", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    try
+                    {
+                        //For customizing styles tweak res/raw/style_json.json  https://mapstyle.withgoogle.com/
+                        boolean success = mGoogleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(activity, R.raw.style_json));
+                        if (!success)
+                        {
+                            //dbglog.Log("Style parsing failed.");
+                            System.out.println("Style parsing failed.");
+                        }
+                    } catch (Exception e)
+                    {
+                        //dbglog.Log("Style parsing failed.");
+                        System.out.println("Style parsing failed.");
+                    }
+                }
+            });
             // Get the location given by the system
             LocationManager location = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -152,7 +183,11 @@ public class UbidotsActivity extends Activity implements
             };
 
             // Set the listener to the location manager
-            location.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+            try {
+                location.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+            } catch (SecurityException e) {
+                e.printStackTrace();
+            }
         }
 
         // Update the text inside the button with the time to push
@@ -340,5 +375,21 @@ public class UbidotsActivity extends Activity implements
                 mEditor.apply();
             }
         }
+    }
+
+
+    @Override
+    public void onMapReady(GoogleMap map) {
+        // DO WHATEVER YOU WANT WITH GOOGLEMAP
+        map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        try {
+            map.setMyLocationEnabled(true);
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+        map.setTrafficEnabled(true);
+        map.setIndoorEnabled(true);
+        map.setBuildingsEnabled(true);
+        map.getUiSettings().setZoomControlsEnabled(true);
     }
 }
