@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Strings for AndroidManifest.xml -->
-    <string name="app_name">Ubidots</string>
+    <string name="app_name">Ubidots GPS Tracker</string>
     <string name="title_activity_introduction">IntroductionActivity</string>
     <string name="title_activity_token">TokenActivity</string>
     <string name="title_activity_ubidots">UbidotsActivity</string>
