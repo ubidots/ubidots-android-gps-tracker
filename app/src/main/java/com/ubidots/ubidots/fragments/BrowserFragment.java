@@ -1,10 +1,10 @@
 package com.ubidots.ubidots.fragments;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +13,9 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.ubidots.ApiClient;
-import com.ubidots.DataSource;
-import com.ubidots.Variable;
+import com.ubidots.ubidots.ApiClient;
+import com.ubidots.ubidots.DataSource;
+import com.ubidots.ubidots.Variable;
 import com.ubidots.ubidots.Constants;
 import com.ubidots.ubidots.R;
 import com.ubidots.ubidots.VerificationActivity;

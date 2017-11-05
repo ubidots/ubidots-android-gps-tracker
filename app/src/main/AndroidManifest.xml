@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ubidots.ubidots" >
-
+    package="com.ubidots.ubidots">
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
     <permission
         android:name="com.ubidots.ubidots.MAPS_RECEIVE"
         android:protectionLevel="signature" />
@@ -20,18 +24,15 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
         android:theme="@style/UbidotsTheme" >
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
-        <activity
-            android:name=".MainActivity"
-            android:configChanges="orientation"
-            android:label="@string/app_name"
-            android:theme="@style/UbidotsTheme.NoActionBar" >
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,10 +48,19 @@
             android:name=".UbidotsActivity"
             android:label="@string/title_activity_ubidots" >
         </activity>
-
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
         <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="here_goes_api_key" />
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+
 
         <service
             android:name=".services.PushLocationService"
@@ -62,6 +72,12 @@
                 <action android:name="com.ubidots.ubidots.ACTION_PUSH_LOCATION_ALARM" />
             </intent-filter>
         </receiver>
-    </application>
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value=""
+            />
+
+    </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
